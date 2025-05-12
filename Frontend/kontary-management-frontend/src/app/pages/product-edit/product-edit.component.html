@@ -1,0 +1,87 @@
+<app-navbar></app-navbar>
+<div class="container margin-top mb-5">
+    <div class="mx-auto w-75">
+        <h4 class="mb-4">Actualizar Producto</h4>
+        <form (ngSubmit)="guardarCambios()">
+
+            <!-- Código, Precio y Nombre -->
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" [(ngModel)]="product.codigo" name="codigo"
+                            placeholder="Codigo" />
+                        <label>Código</label>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" [(ngModel)]="product.price" name="price"
+                            placeholder="Precio" />
+                        <label>Precio</label>
+                    </div>
+                </div>
+                <div class="col-md-7 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" [(ngModel)]="product.name" name="name"
+                            placeholder="Nombre" />
+                        <label>Nombre</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Descripción -->
+            <div class="row">
+                <div class="col-md-9 mb-3">
+                    <div class="form-floating h-100">
+                        <textarea class="form-control h-100" [(ngModel)]="product.description" name="description"
+                            placeholder="Descripción" style="resize: none;"></textarea>
+                        <label>Descripción</label>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" [(ngModel)]="product.category" name="category">
+                            <option *ngFor="let cat of categories" [value]="cat._id">{{ cat.name }}</option>
+                        </select>
+                        <label>Categoría</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" [(ngModel)]="product.stock" name="stock"
+                            placeholder="Stock" />
+                        <label>Stock</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Imagen y Estado -->
+            <div class="row">
+                <div class="col-md-8 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" [(ngModel)]="product.image" name="image"
+                            placeholder="Image" />
+                        <label>Imagen</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-floating">
+                        <select class="form-select" [(ngModel)]="product.status" name="status">
+                            <option value="disponible">Disponible</option>
+                            <option value="agotado">Agotado</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                        <label>Estado</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-center mt-4">
+                <button type="submit" class="btn btn-success me-2">Guardar</button>
+                <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
