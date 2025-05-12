@@ -15,6 +15,20 @@ exports.registroUsuario = async (req, res) => {
         await usuario.save();
         res.status(201).json({ message: 'Usuario registrado exitosamente', usuario });
     } catch (error) {
+        if (error.code === 11000) {
+            // Identifica qué campo generó el error de clave duplicada
+            const campo = Object.keys(error.keyPattern)[0];
+            let mensaje = 'Ya existe un registro con ese valor.';
+
+            if (campo === 'username') {
+                mensaje = 'El nombre de usuario ya está en uso.';
+            } else if (campo === 'email') {
+                mensaje = 'El correo electrónico ya está registrado.';
+            }
+
+            return res.status(400).json({ message: mensaje });
+        }
+
         res.status(500).json({ message: 'Error al registrar el usuario', error });
     }
 };
