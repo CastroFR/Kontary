@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="container" style="max-width: 400px;">
+    <h3 class="text-center mb-4">Iniciar Sesión</h3>
+
+    <div *ngIf="loginError" class="alert alert-danger text-center" role="alert">
+      Correo o contraseña incorrectos
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Correo -->
+      <div class="input-group has-validation mb-3">
+        <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+        <div class="form-floating is-invalid flex-grow-1">
+          <input type="email" class="form-control is-invalid"
+            [class.is-invalid]="submitted && loginForm.get('email')?.invalid" id="floatingInputEmail"
+            formControlName="email" placeholder="Correo Electrónico" required />
+          <label for="floatingInputEmail">Correo Electrónico</label>
+        </div>
+        <div class="invalid-feedback" *ngIf="submitted && loginForm.get('email')?.invalid">
+          Este campo es requerido
+        </div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="input-group has-validation mb-3">
+        <span class="input-group-text "><i class="bi bi-lock-fill"></i></span>
+        <div class="form-floating is-invalid flex-grow-1">
+          <input type="password" class="form-control is-invalid"
+            [class.is-invalid]="submitted && loginForm.get('password')?.invalid" id="floatingInputPassword"
+            formControlName="password" placeholder="Contraseña" />
+          <label for="floatingInputPassword">Contraseña</label>
+        </div>
+        <div class="invalid-feedback" *ngIf="submitted && loginForm.get('password')?.invalid">
+          Este campo es requerido
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mb-3">
+        <p class="mb-0">
+          ¿No tienes cuenta?
+          <a class="text-decoration-none ms-1 cursor-pointer" routerLink="/register">Regístrate</a>
+        </p>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 ">
+        Iniciar sesión
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+<app-navbar></app-navbar>
+
+<div class="container margin-top">
+    <div class="row mt-4 mb-4 justify-content-center">
+        <div>
+            <button type="button" class="btn btn-success me-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Agregar Producto</button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Agregar Categoria</button>
+        </div>
+    </div>
+
+    <app-products-list></app-products-list>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="addProductModalLabel">Agregar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="codigo" class="form-control" formControlName="codigo" placeholder="Codigo" required>
+                            <label for="codigo" class="form-label">Código</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" id="name" class="form-control" formControlName="name" placeholder="Nombre" required>
+                            <label for="name" class="form-label">Nombre</label>                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <textarea id="description" class="form-control" formControlName="description" placeholder="Descripción" required></textarea>
+                            <label for="description" class="form-label">Descripción</label>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="number" id="price" class="form-control" formControlName="price" placeholder="Precio" required>
+                            <label for="price" class="form-label">Precio</label>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select id="category" class="form-select" formControlName="category" required>
+                                <option *ngFor="let cat of categories" [value]="cat._id">{{ cat.name }}</option>
+                            </select>
+                            <label for="category" class="form-label">Categoría</label>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="number" id="stock" class="form-control" formControlName="stock" placeholder="Stock" required>
+                            <label for="stock" class="form-label">Stock</label>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" id="image" class="form-control" formControlName="image" placeholder="URL de Imagen">
+                            <label for="image" class="form-label">URL de Imagen</label>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select id="status" class="form-select" formControlName="status">
+                                <option value="disponible">Disponible</option>
+                                <option value="agotado">Agotado</option>
+                                <option value="inactivo">Inactivo</option>
+                            </select>
+                            <label for="status" class="form-label">Estado</label>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary " [disabled]="!productForm.valid">Guardar
+                            Producto</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar Categoría -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title fs-5" id="addCategoryModalLabel">Agregar Categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <form [formGroup]="categoryForm" (ngSubmit)="onCategorySubmit()">
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" id="categoryName" class="form-control" formControlName="name" placeholder="Nombre" required>
+            <label for="categoryName">Nombre</label>
+          </div>
+
+          <div class="form-floating mb-3 h-100">
+            <textarea id="categoryDescription" class="form-control h-100" formControlName="description" placeholder="Descripción"></textarea>
+            <label for="categoryDescription">Descripción</label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!categoryForm.valid">Guardar Categoría</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

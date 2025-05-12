@@ -1,0 +1,36 @@
+<div class="col-12">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of productos">
+                    <td>{{ producto.codigo }}</td>
+                    <td>{{ producto.name }}</td>
+                    <td>{{ producto.description }}</td>
+                    <td>${{ producto.price }}</td>
+                    <td>{{ producto.stock }}</td>
+                    <td>{{ producto.status | titlecase }}</td>
+                    <td class="text-center">
+                        <a (click)="editar(producto)" class="me-3" style="cursor: pointer;">
+                            <i class="bi bi-pencil-square fs-5"></i>
+                        </a>
+
+                        <a (click)="confirmarEliminacion(producto._id)" class="text-danger" style="cursor:pointer;">
+                            <i class="bi bi-trash fs-5"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

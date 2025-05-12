@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="container" style="max-width: 400px;">
+        <h3 class="text-center mb-4">Registrarse</h3>
+
+        <div *ngIf="registerError" class="alert alert-danger text-center" role="alert">
+            {{ registerErrorMessage }}
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Usuario -->
+            <div class="input-group has-validation mb-3">
+                                <div class="form-floating is-invalid flex-grow-1">
+                    <input type="text" class="form-control is-invalid"
+                        [class.is-invalid]="submitted && registerForm.get('username')?.invalid"
+                        id="floatingInputUsername" formControlName="username" placeholder="Nombre de usuario" />
+                    <label for="floatingInputUsername">Nombre de usuario</label>
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && registerForm.get('username')?.invalid">
+                    Este campo es requerido
+                </div>
+            </div>
+
+            <!-- Correo -->
+            <div class="input-group has-validation mb-3">                
+                <div class="form-floating flex-grow-1 is-invalid">
+                    <input type="email" class="form-control is-invalid"
+                        [class.is-invalid]="submitted && registerForm.get('email')?.invalid" id="floatingInputEmail"
+                        formControlName="email" placeholder="Correo Electrónico" />
+                    <label for="floatingInputEmail">Correo Electrónico</label>
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && registerForm.get('email')?.invalid">
+                    Debe ser un correo electrónico válido
+                </div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="input-group has-validation mb-4">                
+                <div class="form-floating flex-grow-1 is-invalid">
+                    <input type="password" class="form-control is-invalid"
+                        [class.is-invalid]="submitted && registerForm.get('password')?.invalid"
+                        id="floatingInputPassword" formControlName="password" placeholder="Contraseña" />
+                    <label for="floatingInputPassword">Contraseña</label>
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && registerForm.get('password')?.invalid">
+                    La contraseña debe tener al menos 6 caracteres
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mb-3">
+                <p class="mb-0">
+                    ¿Ya tienes cuenta?
+                    <a class="text-decoration-none ms-1" routerLink="/login">Inicia sesión</a>
+                </p>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">
+                Registrarse
+            </button>
+        </form>
+    </div>
+</div>
