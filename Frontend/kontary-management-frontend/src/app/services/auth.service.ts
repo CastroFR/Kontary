@@ -24,7 +24,7 @@ export class AuthService {
 
     try {
       const parsedUser = JSON.parse(user);
-      return parsedUser.role === 'admin';
+      return parsedUser.role === 'administrador';
     } catch {
       return false;
     }
